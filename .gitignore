@@ -2,6 +2,7 @@ checkpoints/
 results/
 runs/
 data/
+networks/
 
 __pycache__/
 *.pyc
