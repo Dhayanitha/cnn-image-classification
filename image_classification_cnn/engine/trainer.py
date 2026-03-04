@@ -15,7 +15,7 @@ def run_experiment(model, model_name, trainloader, testloader, device):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     CHECKPOINT_DIR = os.path.join(BASE_DIR, "checkpoints")
     RESULTS_DIR = os.path.join(BASE_DIR, "results")
-    RUN_DIR = os.path.join(BASE_DIR,"run")
+    RUN_DIR = os.path.join(BASE_DIR,"runs", model_name)
 
     os.makedirs(CHECKPOINT_DIR, exist_ok=True)
     os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -57,11 +57,9 @@ def run_experiment(model, model_name, trainloader, testloader, device):
         scheduler.step()
 
         writer.add_scalar("Loss/train", train_loss, epoch)
-        writer.add_scalar("Accuracy/train", train_acc, epoch)
-        writer.add_scalar("Accuracy/test", test_acc, epoch)
-        writer.add_scalar("Loss/train", train_loss, epoch)
         writer.add_scalar("Loss/val", val_loss, epoch)
-
+        writer.add_scalar("Accuracy/train", train_acc, epoch)
+        writer.add_scalar("Accuracy/val", test_acc, epoch)
 
         if val_loss < best_val_loss:
             best_val_loss=val_loss
